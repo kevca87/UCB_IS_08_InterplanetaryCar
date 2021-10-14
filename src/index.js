@@ -1,4 +1,4 @@
-import { splitCommandParts } from './InterplanetaryCar';
+import { splitCommandParts, executeCommands } from './InterplanetaryCar';
 
 
 const form = document.querySelector("#form");
@@ -19,5 +19,7 @@ form.addEventListener("submit",event=>{
     let movementsCommands = commandParts[2];
     gridShapeOutput.innerHTML = gridShapeOutput.textContent + gridShape;    
     initPosOutput.innerHTML = initPosOutput.textContent + initPos;    
-    movementCommandsOutput.innerHTML = movementCommandsOutput.textContent + movementsCommands;    
+    movementCommandsOutput.innerHTML = movementCommandsOutput.textContent + movementsCommands;
+    let finalPos = executeCommands(command);
+    finalPosOutput.innerHTML = finalPosOutput.textContent +  finalPos;
 })

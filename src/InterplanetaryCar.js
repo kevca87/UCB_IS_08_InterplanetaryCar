@@ -79,40 +79,62 @@ function getOrientation(initPos)
   return initPos[orientationIndex];
 }
 
-function getX(initPos)
+function getX(pos)
 {
-  return initPos.split(',')[0];
+  return parseInt(pos.split(',')[0]);
 }
 
-function getY(initPos)
+function getY(pos)
 {
-  return initPos.split(',')[1];
+  return parseInt(pos.split(',')[1]);
 }
+
 
 function jump(initPos)
 {
   let orientationJumps = {
-    'N':(pos)=>{pos[1]=pos[1]+2},
-    'E':(pos)=>{pos[0]=pos[0]+2},
-    'S':(pos)=>{pos[1]=pos[1]-2},
-    'O':(pos)=>{pos[0]=pos[0]-2}
+    'N':(pos)=>{pos[1]=pos[1]+2; return pos;},
+    'E':(pos)=>{pos[0]=pos[0]+2; return pos;},
+    'S':(pos)=>{pos[1]=pos[1]-2; return pos;},
+    'O':(pos)=>{pos[0]=pos[0]-2; return pos;}
   }
   let orientation = getOrientation(initPos);
   let x = getX(initPos);
   let y = getY(initPos);
   let actualPos = [x,y]
   let jumpFunction = orientationJumps[orientation];
-  return jumpFunction(actualPos).join(',')+orientation;
+  let newPos = jumpFunction(actualPos);
+  console.log(newPos)
+  return newPos.join(',')+orientation;
+}
+
+function goAhead(initPos)
+{
+  let orientationSteps = {
+    'N':(pos)=>{pos[1]=pos[1]+1; return pos;},
+    'E':(pos)=>{pos[0]=pos[0]+1; return pos;},
+    'S':(pos)=>{pos[1]=pos[1]-1; return pos;},
+    'O':(pos)=>{pos[0]=pos[0]-1; return pos;}
+  }
+  let orientation = getOrientation(initPos);
+  let x = getX(initPos);
+  let y = getY(initPos);
+  let actualPos = [x,y]
+  let goAheadFunction = orientationSteps[orientation];
+  let newPos = goAheadFunction(actualPos);
+  return newPos.join(',')+orientation;
 }
 
 
 function executeCommands(command)
 {
+  let commandFunctions = {'S':jump,'A':goAhead}
   let commandParts = splitCommandParts(command);
   let gridShape = validateGridShape(commandParts[0]);
   let initPos = validateInitPos(commandParts[1]);
   let commands = commandParts[2];
-  let finalPos = jump(initPos);
+  let commandFunction = commandFunctions[commands];
+  let finalPos = commandFunction(initPos);
   return finalPos;
 }
 

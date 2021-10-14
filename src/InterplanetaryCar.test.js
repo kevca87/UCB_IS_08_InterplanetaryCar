@@ -67,4 +67,7 @@ describe("Validar salto del auto con el comando S", () => {
   it("TEST2: Modificar la posición final con el ingresodel comando S avanzando 2 posiciones", () => {
     expect(executeCommands("5,5/0,0N/S")).toEqual("0,2N");
   });
+  it("TEST3: Modificar la posición final con el ingresodel comando S avanzando 2 posiciones", () => {
+    expect(executeCommands("5,5/0,0N/A")).toEqual("0,1N");
+  });
 });
