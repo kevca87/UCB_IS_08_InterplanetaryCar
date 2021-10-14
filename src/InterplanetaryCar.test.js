@@ -152,3 +152,15 @@ describe("Modificar la orientacion del auto", () => {
     expect(executeCommands("5,5/0,0N/IIII")).toEqual("0,0N");
   });
 });
+
+describe("Combinar comandos de movimiento", () => {
+  it("TEST1: Debe devolver 1,3N", () => {
+    expect(executeCommands("5,5/1,2N/IAIAIAIAA")).toEqual("1,3N");
+  });
+  it("TEST2: Debe devolver 5,1E", () => {
+    expect(executeCommands("5,5/3,3E/AADAADADDA")).toEqual("5,1E");
+  });
+  it("TEST3: Comandos incorrectos. Debe devolver 5,1E", () => {
+    expect(executeCommands("5,5/3,3E/AAaDdsafdaAADsdsADDA")).toEqual("5,1E");
+  });
+});
