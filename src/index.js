@@ -17,9 +17,9 @@ form.addEventListener("submit",event=>{
     let gridShape = commandParts[0];
     let initPos = commandParts[1];
     let movementsCommands = commandParts[2];
-    gridShapeOutput.innerHTML = gridShapeOutput.textContent + gridShape;    
-    initPosOutput.innerHTML = initPosOutput.textContent + initPos;    
-    movementCommandsOutput.innerHTML = movementCommandsOutput.textContent + movementsCommands;
+    gridShapeOutput.innerHTML = "Dimensiones de la grilla: " + gridShape;    
+    initPosOutput.innerHTML = "Posición inicial: " + initPos;    
+    movementCommandsOutput.innerHTML = "Comandos: " + movementsCommands;
     let finalPos = executeCommands(command);
-    finalPosOutput.innerHTML = finalPosOutput.textContent +  finalPos;
+    finalPosOutput.innerHTML = "Posición final: " +  finalPos;
 })

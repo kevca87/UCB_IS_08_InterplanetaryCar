@@ -1,4 +1,4 @@
-import {splitCommandParts,validateGridShape,validateInitPos,executeCommands,getValidPos,isPosInsideGrid,validateMovementCommands} from "./InterplanetaryCar.js"
+import {splitCommandParts,validateGridShape,validateInitPos,executeCommands,getValidPos,isPosInsideGrid,validateMovementCommands,getMovementCommandsList} from "./InterplanetaryCar.js"
 
 describe("Split de la cadena de comandos", () => {
   it("TEST1: Debe retornar una lista las tres partes de los comandos de entrada", () => {
@@ -92,11 +92,35 @@ describe("Validar la secuencia de comandos de movimiento", () => {
 });
 
 
+describe("Obtener la lista de comandos de movimiento", () => {
+  it("TEST1: Obtener la lista de comandos de movimiento", () => {
+    expect(getMovementCommandsList("IAIAIAIAA")).toEqual(["I","A","I","A","I","A","I","A","A"]);
+  });
+  it("TEST2: Obtener la lista de comandos de movimiento", () => {
+    expect(getMovementCommandsList("IAIAIsdsdfaAIAA")).toEqual(["I","A","I","A","I","A","I","A","A"]);
+  });
+});
+
 describe("Validar salto del auto con el comando A", () => {
   it("TEST1: Modificar la posición final con el ingresodel comando A (un solo comando)", () => {
     expect(executeCommands("5,5/0,0N/A")).toEqual("0,1N");
   });
 });
+
+
+describe("Validar salto del auto con el comando A repetido una o mas veces", () => {
+  it("TEST1: Modificar la posición final con el ingreso del comando AA", () => {
+    expect(executeCommands("5,5/0,0N/AA")).toEqual("0,2N");
+  });
+  it("TEST2: Modificar la posición final con el ingreso del comando AAA", () => {
+    expect(executeCommands("5,5/0,0N/AAA")).toEqual("0,3N");
+  });
+  it("TEST3: Cuando se supere el limite con AAAAAA debe devolver el borde correspondiente en la pos final", () => {
+    expect(executeCommands("5,5/0,0N/AAAAAA")).toEqual("0,5N");
+  });
+});
+
+
 
 
 describe("Validar salto del auto con el comando S", () => {

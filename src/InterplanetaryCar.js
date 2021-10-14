@@ -171,16 +171,32 @@ function validateMovementCommands(movementCommands)
   return movementCommandsValidated;
 }
 
+function getMovementCommandsList(movementCommands)
+{
+  let movementCommandsList = [];
+  movementCommands = validateMovementCommands(movementCommands);
+  for(let i=0;i<movementCommands.length;i++){
+    let character = movementCommands[i];
+    movementCommandsList.push(character);
+  }
+  return movementCommandsList;
+}
+
 function executeCommands(command)
 {
   let movementFunctions = {'S':jump,'A':goAhead}
   let commandParts = splitCommandParts(command);
   let gridShape = validateGridShape(commandParts[0]);
   let initPos = validateInitPos(commandParts[1]);
-  let commands = commandParts[2];
-  let movementFunction = movementFunctions[commands];
-  let finalPos = movementFunction(initPos);
+  let movementCommands = getMovementCommandsList(commandParts[2]);
+  let actualPos = initPos;
+  movementCommands.forEach(movementCommand => {
+    let movementFunction = movementFunctions[movementCommand];
+    actualPos = movementFunction(actualPos);
+    actualPos = getValidPos(gridShape,actualPos);
+  });
+  let finalPos = actualPos;
   return finalPos;
 }
 
-export {splitCommandParts,validateGridShape,validateInitPos,executeCommands,isPosInsideGrid,getValidPos,validateMovementCommands};
+export {splitCommandParts,validateGridShape,validateInitPos,executeCommands,isPosInsideGrid,getValidPos,validateMovementCommands,getMovementCommandsList};
