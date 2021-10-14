@@ -50,10 +50,8 @@ function getInitialPosition(initPos)
   if (!posHasTwoDimensions)
     position.push("0N");
   let initOrientation = position[1][position[1].length-1];
-  console.log(initOrientation);
   position[1] = position[1].substring(0,position[1].length-1);
   initOrientation = getInitOrientation(initOrientation);
-  console.log(initOrientation);
   return position.map((pos)=>getPositionsInt(pos)).join(',') + initOrientation;
 }
 
@@ -136,7 +134,6 @@ function jump(initPos)
   let actualPos = [x,y]
   let jumpFunction = orientationJumps[orientation];
   let newPos = jumpFunction(actualPos);
-  console.log(newPos)
   return newPos.join(',')+orientation;
 }
 
