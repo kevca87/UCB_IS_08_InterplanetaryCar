@@ -1,3 +1,12 @@
+function validateGridShape(gridShape)
+{
+  let defaultGridShape = "5,5"
+  let isEmpty = gridShape == "";
+  if (isEmpty)
+    gridShape = defaultGridShape;
+  return gridShape;
+}
+
 function splitCommandParts(command)
 {
   let commandParts = command.split('/');
@@ -7,4 +16,4 @@ function splitCommandParts(command)
   return commandParts;
 }
 
-export {splitCommandParts};
+export {splitCommandParts,validateGridShape};
