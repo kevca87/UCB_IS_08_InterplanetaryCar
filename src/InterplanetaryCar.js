@@ -157,17 +157,30 @@ function goAhead(initPos)
   return newPos.join(',')+orientation;
 }
 
+function validateMovementCommands(movementCommands)
+{
+  let validMovementCommands = ['I','D','A','S']
+  let movementCommandsValidated = "";
+  for(let i=0;i<movementCommands.length;i++){
+    let character = movementCommands[i];
+    if (validMovementCommands.includes(character))
+    {
+      movementCommandsValidated = movementCommandsValidated + character;
+    }
+  }
+  return movementCommandsValidated;
+}
 
 function executeCommands(command)
 {
-  let commandFunctions = {'S':jump,'A':goAhead}
+  let movementFunctions = {'S':jump,'A':goAhead}
   let commandParts = splitCommandParts(command);
   let gridShape = validateGridShape(commandParts[0]);
   let initPos = validateInitPos(commandParts[1]);
   let commands = commandParts[2];
-  let commandFunction = commandFunctions[commands];
-  let finalPos = commandFunction(initPos);
+  let movementFunction = movementFunctions[commands];
+  let finalPos = movementFunction(initPos);
   return finalPos;
 }
 
-export {splitCommandParts,validateGridShape,validateInitPos,executeCommands,isPosInsideGrid,getValidPos};
+export {splitCommandParts,validateGridShape,validateInitPos,executeCommands,isPosInsideGrid,getValidPos,validateMovementCommands};

@@ -1,4 +1,4 @@
-import {splitCommandParts,validateGridShape,validateInitPos,executeCommands,getValidPos,isPosInsideGrid} from "./InterplanetaryCar.js"
+import {splitCommandParts,validateGridShape,validateInitPos,executeCommands,getValidPos,isPosInsideGrid,validateMovementCommands} from "./InterplanetaryCar.js"
 
 describe("Split de la cadena de comandos", () => {
   it("TEST1: Debe retornar una lista las tres partes de los comandos de entrada", () => {
@@ -76,6 +76,18 @@ describe("Validar si la posicion inicial se encuentra en los limites de la grill
   });
   it("TEST5: Debe retornar el extremo mas al borde correspondiente", () => {
     expect(getValidPos("6,6","7,7N")).toEqual("6,6N");
+  });
+  it("TEST6: Debe retornar el extremo mas al borde correspondiente", () => {
+    expect(getValidPos("5,5","1,7E")).toEqual("1,5E");
+  });
+});
+
+describe("Validar la secuencia de comandos de movimiento", () => {
+  it("TEST1: Debe retornar una cadena solamente con los comandos validos", () => {
+    expect(validateMovementCommands("IAIAIAIAA")).toEqual("IAIAIAIAA");
+  });
+  it("TEST2: Debe retornar una cadena solamente con los comandos validos", () => {
+    expect(validateMovementCommands("IAIAfsIAIAA")).toEqual("IAIAIAIAA");
   });
 });
 
