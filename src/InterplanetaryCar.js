@@ -189,7 +189,7 @@ function rotateCar(pos,rotateCommand)
   let orientationIndex = orientations.indexOf(orientation);
   if (rotateCommand == 'D')
   {
-    orientationIndex = orientationIndex + 1
+    orientationIndex = orientationIndex + 1;
     if(orientationIndex>=orientations.length)
     {
       orientationIndex = 0;
@@ -197,7 +197,11 @@ function rotateCar(pos,rotateCommand)
   }
   else if (rotateCommand == 'I')
   {
-    orientationIndex = orientationIndex - 1
+    orientationIndex = orientationIndex - 1;
+    if(orientationIndex<0)
+    {
+      orientationIndex = orientations.length-1;
+    }
   }
   let newOrientation = orientations[orientationIndex];
   let newPos = pos.substring(0,pos.length-1)+newOrientation;

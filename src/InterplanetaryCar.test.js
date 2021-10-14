@@ -148,4 +148,7 @@ describe("Modificar la orientacion del auto", () => {
   it("TEST4: Debe devolver el auto apuntando al Norte N", () => {
     expect(executeCommands("5,5/0,0N/DDDD")).toEqual("0,0N");
   });
+  it("TEST5: Giro a la izquierda, debe devolver el auto apuntando al Norte N", () => {
+    expect(executeCommands("5,5/0,0N/IIII")).toEqual("0,0N");
+  });
 });
