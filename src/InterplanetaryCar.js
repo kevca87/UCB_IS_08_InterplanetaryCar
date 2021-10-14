@@ -1,6 +1,9 @@
 function getGridDimensions(gridShape)
 {
   let dimensions = gridShape.split(',');
+  let gridHasTwoDimensions = dimensions.length == 2;
+  if (!gridHasTwoDimensions)
+    dimensions.push("");
   return dimensions.map((dim)=>getDimensionInt(dim));
 }
 
@@ -15,9 +18,6 @@ function getDimensionInt(gridDimension)
 
 function validateGridShape(gridShape)
 {
-  let shapeIsEmpty = gridShape == "";
-  if (shapeIsEmpty)
-    gridShape = ",";
   let gridDimensions = getGridDimensions(gridShape);
   return gridDimensions.join(',');
 }
