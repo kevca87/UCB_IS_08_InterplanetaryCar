@@ -61,23 +61,6 @@ describe("Validar la entrada de la posicion inicial del auto", () => {
 });
 
 
-/*
-Como: navegante remoto del auto
-Quiero: que en caso de que en la seccion de posicion inicial
-alguna dimension de la posicion del auto exceda el tamaño de la grilla se devuelva la posicion mas al borde
-Para: evitar perdida del vehiculo y mantener un estado consistente en el programa
-
-Criterio de confirmación: 
-Si el tamaño de la grilla es 5,5 y el usuario ingresa una cadena de posicion inicial
-"7,7N"  -> "5,5N"
-- Posición inicial: 5,5N
-
-"7,4N"  -> "5,4N"
-- Posición inicial: 5,4N
-
-"1,7E"  -> "1,5E"
-- Posición inicial: 1,5E
-*/
 describe("Validar si la posicion inicial se encuentra en los limites de la grilla", () => {
   it("TEST1: Debe retornar false si la posicion esta fuera de la grilla", () => {
     expect(isPosInsideGrid("5,5","7,7N")).toEqual(false);
@@ -90,6 +73,9 @@ describe("Validar si la posicion inicial se encuentra en los limites de la grill
   });
   it("TEST4: Debe retornar el extremo mas al borde correspondiente", () => {
     expect(getValidPos("5,5","7,7N")).toEqual("5,5N");
+  });
+  it("TEST5: Debe retornar el extremo mas al borde correspondiente", () => {
+    expect(getValidPos("6,6","7,7N")).toEqual("6,6N");
   });
 });
 

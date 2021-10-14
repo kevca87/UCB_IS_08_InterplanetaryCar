@@ -89,7 +89,18 @@ function getY(pos)
   return parseInt(pos.split(',')[1]);
 }
 
-
+function getInsideGridValue(x,xLimitGrid)
+{
+  if (x<=0)
+  {
+    x = 0;
+  }
+  else if (x>=xLimitGrid)
+  {
+    x = xLimitGrid;
+  }
+  return x;
+}
 
 function isPosInsideGrid(pos,gridShape)
 {
@@ -99,9 +110,16 @@ function isPosInsideGrid(pos,gridShape)
   return (gridDimensions[0] <= x && x >= 0 )&& (gridDimensions[1] <= y && y >= 0);
 }
 
-function getValidPos(pos,gridShape)
+function getValidPos(gridShape,pos)
 {
-  return "5,5N"
+  let x = getX(pos);
+  let y = getY(pos);
+  let orientation = getOrientation(pos)
+  let gridDimensions = getGridDimensions(gridShape); 
+  x = getInsideGridValue(x,gridDimensions[0]);
+  y = getInsideGridValue(y,gridDimensions[1]);
+  pos = x.toString() + "," + y.toString() + orientation;
+  return pos;
 }
 
 function jump(initPos)
