@@ -36,7 +36,7 @@ function getInitOrientation(orientation)
 {
   let validOrientations = ["N","E","S","O"];
   let defuaultOrientation = "N";
-  if (!(orientation in validOrientations))
+  if (!validOrientations.includes(orientation))
   {
     orientation = defuaultOrientation;
   }
@@ -50,8 +50,10 @@ function getInitialPosition(initPos)
   if (!posHasTwoDimensions)
     position.push("0N");
   let initOrientation = position[1][position[1].length-1];
+  console.log(initOrientation);
   position[1] = position[1].substring(0,position[1].length-1);
   initOrientation = getInitOrientation(initOrientation);
+  console.log(initOrientation);
   return position.map((pos)=>getPositionsInt(pos)).join(',') + initOrientation;
 }
 
