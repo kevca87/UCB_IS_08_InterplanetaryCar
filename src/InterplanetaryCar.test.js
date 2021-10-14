@@ -1,7 +1,7 @@
-import {toInt,stringCalculator as addNumbers,getDelimiter,getDelimitersList} from "./InterplanetaryCar.js"
+//import {splitCommandParts} from "./InterplanetaryCar.js"
 
-describe("Ingresar una cadena con un unico numero retornar el mismo numero (como int)", () => {
-  it("Debe retornar el numero convertido de cadena a int", () => {
-    expect(addNumbers("87")).toEqual(87);
+describe("Split de la cadena de comandos", () => {
+  it("Debe retornar una lista las tres partes de los comandos de entrada", () => {
+    expect(splitCommandParts("5,5/1,2N/IAIAIAIAA")).toEqual(87);
   });
 });
