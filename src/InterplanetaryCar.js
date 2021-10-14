@@ -190,6 +190,10 @@ function rotateCar(pos,rotateCommand)
   if (rotateCommand == 'D')
   {
     orientationIndex = orientationIndex + 1
+    if(orientationIndex>=orientations.length)
+    {
+      orientationIndex = 0;
+    }
   }
   else if (rotateCommand == 'I')
   {
