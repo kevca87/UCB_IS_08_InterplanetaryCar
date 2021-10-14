@@ -1,10 +1,25 @@
+function getGridDimensions(gridShape)
+{
+  let dimensions = gridShape.split(',');
+  return dimensions.map((dim)=>getDimensionInt(dim));
+}
+
+function getDimensionInt(gridDimension)
+{
+  let defaultDimension = 5;
+  let dimension = parseInt(gridDimension);
+  if (isNaN(dimension))
+    dimension = defaultDimension;
+  return dimension;
+}
+
 function validateGridShape(gridShape)
 {
-  let defaultGridShape = "5,5"
-  let isEmpty = gridShape == "";
-  if (isEmpty)
-    gridShape = defaultGridShape;
-  return gridShape;
+  let shapeIsEmpty = gridShape == "";
+  if (shapeIsEmpty)
+    gridShape = ",";
+  let gridDimensions = getGridDimensions(gridShape);
+  return gridDimensions.join(',');
 }
 
 function splitCommandParts(command)

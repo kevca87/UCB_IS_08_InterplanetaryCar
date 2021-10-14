@@ -25,4 +25,13 @@ describe("Validar la entrada del tamaño de la grilla", () => {
   it("TEST2: Retornar dimensiones de la grilla por defecto", () => {
     expect(validateGridShape("")).toEqual("5,5");
   });
+  it("TEST3: Retornar dimensiones de la grilla por defecto", () => {
+    expect(validateGridShape("escribe-n,escribe-m")).toEqual("5,5");
+  });
+  it("TEST4: Retornar una dimensiones de la grilla por defecto", () => {
+    expect(validateGridShape("6,escribe-m")).toEqual("6,5");
+  });
+  // -> 
+  //",7" -> "5,7"
+  //"anything" -> "5,5"
 });
