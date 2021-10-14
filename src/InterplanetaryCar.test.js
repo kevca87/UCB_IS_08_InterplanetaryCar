@@ -1,4 +1,4 @@
-import {splitCommandParts,validateGridShape,validateInitPos} from "./InterplanetaryCar.js"
+import {splitCommandParts,validateGridShape,validateInitPos,executeCommands} from "./InterplanetaryCar.js"
 
 describe("Split de la cadena de comandos", () => {
   it("TEST1: Debe retornar una lista las tres partes de los comandos de entrada", () => {
@@ -57,5 +57,14 @@ describe("Validar la entrada de la posicion inicial del auto", () => {
   });
   it("TEST6: Retornar la posicion inicial del auto por defecto", () => {
     expect(validateInitPos("0,7F")).toEqual("0,7N");
+  });
+});
+
+describe("Validar salto del auto con el comando S", () => {
+  it("TEST1: Modificar la posición final con el ingresodel comando S avanzando 2 posiciones", () => {
+    expect(executeCommands("5,5/1,2N/S")).toEqual("1,4N");
+  });
+  it("TEST2: Modificar la posición final con el ingresodel comando S avanzando 2 posiciones", () => {
+    expect(executeCommands("5,5/0,0N/S")).toEqual("0,2N");
   });
 });

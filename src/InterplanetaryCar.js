@@ -72,4 +72,48 @@ function splitCommandParts(command)
   return commandParts;
 }
 
-export {splitCommandParts,validateGridShape,validateInitPos};
+
+function getOrientation(initPos)
+{
+  let orientationIndex = initPos.length - 1
+  return initPos[orientationIndex];
+}
+
+function getX(initPos)
+{
+  return initPos.split(',')[0];
+}
+
+function getY(initPos)
+{
+  return initPos.split(',')[1];
+}
+
+function jump(initPos)
+{
+  let orientationJumps = {
+    'N':(pos)=>{pos[1]=pos[1]+2},
+    'E':(pos)=>{pos[0]=pos[0]+2},
+    'S':(pos)=>{pos[1]=pos[1]-2},
+    'O':(pos)=>{pos[0]=pos[0]-2}
+  }
+  let orientation = getOrientation(initPos);
+  let x = getX(initPos);
+  let y = getY(initPos);
+  let actualPos = [x,y]
+  let jumpFunction = orientationJumps[orientation];
+  return jumpFunction(actualPos).join(',')+orientation;
+}
+
+
+function executeCommands(command)
+{
+  let commandParts = splitCommandParts(command);
+  let gridShape = validateGridShape(commandParts[0]);
+  let initPos = validateInitPos(commandParts[1]);
+  let commands = commandParts[2];
+  let finalPos = jump(initPos);
+  return finalPos;
+}
+
+export {splitCommandParts,validateGridShape,validateInitPos,executeCommands};
