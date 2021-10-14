@@ -1,0 +1,242 @@
+===================================================================================================================
+
+Como: navegante remoto del auto
+Quiero: verificar que la linea de comandos se desgloza correctamente
+las instrucciones y posiciones basados en el caracter "/"
+Para: tener certeza y confianza del correcto registro del comando
+
+Criterio de confirmación: 
+Si el usuario ingresa una cadena "5,5/1,2N/IAIAIAIAA"  -> ["5,5","1,2N","IAIAIAIAA"]
+- Tamaño de la grilla: 5,5
+- Posición inicial: 1,2 N
+- Comandos: IAIAIAIAA
+
+Si el usuario ingresa una cadena con alguna parte del comando faltante "5,5//IAIAIAIAA" 
+se tomara un valor por defecto -> ["5,5","","IAIAIAIAA"]
+- Tamaño de la grilla: 5,5
+- Posición inicial: 
+- Comandos: IAIAIAIAA
+
+Si el usuario ingresa una cadena con alguna parte del comando incorrecta "5,5/fasdfsadf/IAIAIAIAA" 
+"5,5/1,2N/" -> ["5,5","1,2N",""]
+- Tamaño de la grilla: 5,5
+- Posición inicial: fasdfsadf
+- Comandos: IAIAIAIAA
+
+
+
+===================================================================================================================
+
+Como: navegante remoto del auto
+Quiero: que el programa me alerte si me falto una parte del comando 
+Para: no tener el temor de errar los comandos.
+
+Si el usuario ingresa una cadena con un / faltante "5,5/1,2NIAIAIAIAA" mostrar sintaxis incorrecta 
+"5,5/1,2NIAIAIAIAA" -> ["","",""]
+Sintaxis incorrecta 
+- Tamaño de la grilla: 
+- Posición inicial: 
+- Comandos: 
+
+
+===================================================================================================================
+
+
+Como: navegante remoto del auto
+Quiero: verificar que la linea de comandos retorna el tamaño de la grilla indicado o uno por defecto
+Para: tener certeza y confianza del registro del TAMAÑO DE LA GRILLA, manual o por defecto.
+
+Criterio de confirmación: 
+Si el usuario ingresa una cadena "5,5"  -> "5,5"
+- Tamaño de la grilla: 5,5
+Si el usuario ingresa una cadena vacia "" 
+se tomara un valor por defecto -> "5,5"
+- Tamaño de la grilla: 5,5
+Si el usuario ingresa una cadena que no cumple el formato <n>,<m> 
+se tomara un valor por defecto -> "5,5"
+"escribe-n,escribe-m" -> "5,5"
+"6,escribe-m" -> "6,5"
+",7" -> "5,7"
+"anything" -> "5,5"
+
+
+
+===================================================================================================================
+
+Como: navegante remoto del auto
+Quiero: verificar que la linea de comandos retorna la POSICION INICIAL del auto indicada o una por defecto
+Para: tener certeza y confianza del registro de la posicion inicial del auto
+
+Criterio de confirmación: 
+Si el usuario ingresa una cadena "1,2N"  -> "1,2N"
+- Posición inicial: 1,2 N
+Si el usuario ingresa una cadena vacia ""
+se tomara un valor por defecto -> "0,0N"
+- Posición inicial: 0,0 N
+
+Si el usuario ingresa una cadena que no cumple el formato <n>,<m><Dir>
+se tomara un valor por defecto
+"escribe-n,escribe-mDir" -> "0,0N"
+"6,escribe-mDir" -> "6,0N"
+",7" -> "0,7N"
+"0,7E" -> "0,7E"
+"0,7F" -> "0,7N"
+
+
+===================================================================================================================
+
+Como: navegante remoto del auto
+Quiero: que en caso de que en la seccion de posicion inicial
+alguna dimension de la posicion del auto exceda el tamaño de la grilla se devuelva la posicion mas al borde
+Para: evitar perdida del vehiculo y mantener un estado consistente en el programa
+
+Criterio de confirmación: 
+Si el tamaño de la grilla es 5,5 y el usuario ingresa una cadena de posicion inicial
+"7,7N"  -> "5,5N"
+- Posición inicial: 5,5N
+
+"7,4N"  -> "5,4N"
+- Posición inicial: 5,4N
+
+"1,7E"  -> "1,5E"
+- Posición inicial: 1,5E
+
+
+===================================================================================================================
+
+Como: navegante remoto del auto
+Quiero: que en caso de que en la seccion de comandos de direccion y avance exista algun caracter incorrecto, no se tome en cuenta
+Para: evitar errores y la preocupación de escribir perfectamente
+
+Criterio de confirmación: 
+Si el usuario ingresa una cadena 
+"IAIAIAIAA"  -> "IAIAIAIAA"
+- Comandos: IAIAIAIAA
+
+"IAIAIAIsAzA"  -> "IAIAIAIAA"
+- Comandos: IAIAIAIAA
+
+"sz"  -> ""
+- Comandos: 
+
+
+===================================================================================================================
+
+Como: navegante remoto del auto
+Quiero: avanzar el auto cuando ingreso A
+Para: mover el auto
+
+Criterio de confirmación: 
+Si el usuario ingresa (en la seccion de comandos) una cadena la posicion final se modificara acorde
+"A"  -> "A"
+- Tamaño de la grilla: 5,5
+- Posición inicial: 0,0N
+- Comandos: A
+- Posición final: 0,1N
+
+
+===================================================================================================================
+
+Como: navegante remoto del auto
+Quiero: avanzar el auto con A multiples veces
+Para: ampliar el rango de movimiento del auto
+
+"AA"  -> "AA"
+- Tamaño de la grilla: 5,5
+- Posición inicial: 0,0N
+- Comandos: AA
+- Posición final: 0,2N
+
+"AAz"  -> "AA"
+- Tamaño de la grilla: 5,5
+- Posición inicial: 0,0N
+- Comandos: AA
+- Posición final: 0,2N
+
+"sz"  -> ""
+- Tamaño de la grilla: 5,5
+- Posición inicial: 0,0N
+- Comandos: 
+- Posición final: 0,0N
+
+
+===================================================================================================================
+
+Como: navegante remoto del auto
+Quiero: girar el auto a la derecha con D
+Para: ampliar el rango de movimiento del auto
+
+Criterio de confirmación: 
+Si el usuario ingresa una cadena 
+"D"  -> "D"
+- Tamaño de la grilla: 5,5
+- Posición inicial: 0,0N
+- Comandos: D
+- Posición final: 0,0E
+
+===================================================================================================================
+
+Como: navegante remoto del auto
+Quiero: girar el auto a la derecha con D multiples veces
+Para: ampliar el rango de movimiento del auto
+
+Criterio de confirmación: 
+"DD"  -> "DD"
+- Tamaño de la grilla: 5,5
+- Posición inicial: 0,0N
+- Comandos: DD
+- Posición final: 0,0S
+
+"DDDD"  -> "DDDD"
+- Tamaño de la grilla: 5,5
+- Posición inicial: 0,0N
+- Comandos: DDDD
+- Posición final: 0,0N
+
+
+===================================================================================================================
+
+Como: navegante remoto del auto
+Quiero: girar el auto a la izquierda con I
+Para: ampliar el rango de movimiento del auto
+
+Criterio de confirmación: 
+Si el usuario ingresa una cadena 
+"I"  -> "I"
+- Tamaño de la grilla: 5,5
+- Posición inicial: 0,0N
+- Comandos: I
+- Posición final: 0,0O
+
+===================================================================================================================
+
+Como: navegante remoto del auto
+Quiero: girar el auto a la izquierda con I multiples veces
+Para: ampliar el rango de movimiento del auto
+
+Criterio de confirmación: 
+"II"  -> "II"
+- Tamaño de la grilla: 5,5
+- Posición inicial: 0,0N
+- Comandos: II
+- Posición final: 0,0S
+
+"IIII"  -> "IIII"
+- Tamaño de la grilla: 5,5
+- Posición inicial: 0,0N
+- Comandos: IIII
+- Posición final: 0,0N
+
+===================================================================================================================
+
+Como: navegante remoto del auto
+Quiero: combinar todos los movimientos del auto
+Para: ampliar el rango de movimiento del auto
+
+Criterio de confirmación: 
+Si el usuario ingresa una cadena 
+"IAIAIAIAA"  -> "IAIAIAIAA"
+- Tamaño de la grilla: 5,5
+- Posición inicial: 1,2N
+- Comandos: IAIAIAIAA
+- Posición final: 1,3N
