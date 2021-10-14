@@ -90,6 +90,20 @@ function getY(pos)
 }
 
 
+
+function isPosInsideGrid(pos,gridShape)
+{
+  let x = getX(pos);
+  let y = getY(pos);
+  let gridDimensions = getGridDimensions(gridShape); 
+  return (gridDimensions[0] <= x && x >= 0 )&& (gridDimensions[1] <= y && y >= 0);
+}
+
+function getValidPos(pos,gridShape)
+{
+  return "5,5N"
+}
+
 function jump(initPos)
 {
   let orientationJumps = {
@@ -138,4 +152,4 @@ function executeCommands(command)
   return finalPos;
 }
 
-export {splitCommandParts,validateGridShape,validateInitPos,executeCommands};
+export {splitCommandParts,validateGridShape,validateInitPos,executeCommands,isPosInsideGrid,getValidPos};

@@ -1,4 +1,4 @@
-import {splitCommandParts,validateGridShape,validateInitPos,executeCommands} from "./InterplanetaryCar.js"
+import {splitCommandParts,validateGridShape,validateInitPos,executeCommands,getValidPos,isPosInsideGrid} from "./InterplanetaryCar.js"
 
 describe("Split de la cadena de comandos", () => {
   it("TEST1: Debe retornar una lista las tres partes de los comandos de entrada", () => {
@@ -60,14 +60,52 @@ describe("Validar la entrada de la posicion inicial del auto", () => {
   });
 });
 
+
+/*
+Como: navegante remoto del auto
+Quiero: que en caso de que en la seccion de posicion inicial
+alguna dimension de la posicion del auto exceda el tamaño de la grilla se devuelva la posicion mas al borde
+Para: evitar perdida del vehiculo y mantener un estado consistente en el programa
+
+Criterio de confirmación: 
+Si el tamaño de la grilla es 5,5 y el usuario ingresa una cadena de posicion inicial
+"7,7N"  -> "5,5N"
+- Posición inicial: 5,5N
+
+"7,4N"  -> "5,4N"
+- Posición inicial: 5,4N
+
+"1,7E"  -> "1,5E"
+- Posición inicial: 1,5E
+*/
+describe("Validar si la posicion inicial se encuentra en los limites de la grilla", () => {
+  it("TEST1: Debe retornar false si la posicion esta fuera de la grilla", () => {
+    expect(isPosInsideGrid("5,5","7,7N")).toEqual(false);
+  });
+  it("TEST2: Debe retornar true si la posicion esta dentro de la grilla", () => {
+    expect(isPosInsideGrid("5,5","0,0N")).toEqual(true);
+  });
+  it("TEST3: Debe retornar true si la posicion esta dentro de la grilla", () => {
+    expect(isPosInsideGrid("5,5","5,5N")).toEqual(true);
+  });
+  it("TEST4: Debe retornar el extremo mas al borde correspondiente", () => {
+    expect(getValidPos("5,5","7,7N")).toEqual("5,5N");
+  });
+});
+
+
+describe("Validar salto del auto con el comando A", () => {
+  it("TEST1: Modificar la posición final con el ingresodel comando A (un solo comando)", () => {
+    expect(executeCommands("5,5/0,0N/A")).toEqual("0,1N");
+  });
+});
+
+
 describe("Validar salto del auto con el comando S", () => {
   it("TEST1: Modificar la posición final con el ingresodel comando S avanzando 2 posiciones", () => {
     expect(executeCommands("5,5/1,2N/S")).toEqual("1,4N");
   });
   it("TEST2: Modificar la posición final con el ingresodel comando S avanzando 2 posiciones", () => {
     expect(executeCommands("5,5/0,0N/S")).toEqual("0,2N");
-  });
-  it("TEST3: Modificar la posición final con el ingresodel comando S avanzando 2 posiciones", () => {
-    expect(executeCommands("5,5/0,0N/A")).toEqual("0,1N");
   });
 });
