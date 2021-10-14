@@ -122,12 +122,27 @@ describe("Validar salto del auto con el comando A repetido una o mas veces", () 
 
 
 
-
 describe("Validar salto del auto con el comando S", () => {
   it("TEST1: Modificar la posición final con el ingresodel comando S avanzando 2 posiciones", () => {
     expect(executeCommands("5,5/1,2N/S")).toEqual("1,4N");
   });
   it("TEST2: Modificar la posición final con el ingresodel comando S avanzando 2 posiciones", () => {
     expect(executeCommands("5,5/0,0N/S")).toEqual("0,2N");
+  });
+  it("TEST3: Modificar la posición final con el ingresodel comando S avanzando 2 posiciones", () => {
+    expect(executeCommands("5,5/0,0N/SS")).toEqual("0,4N");
+  });
+});
+
+
+describe("Modificar la orientacion del auto", () => {
+  it("TEST1: Debe devolver el auto apuntando al Este E", () => {
+    expect(executeCommands("5,5/0,0N/D")).toEqual("0,0E");
+  });
+  it("TEST2: Debe devolver el auto apuntando al Sur S", () => {
+    expect(executeCommands("5,5/0,0N/DD")).toEqual("0,0S");
+  });
+  it("TEST3: Debe devolver el auto apuntando al Oeste O", () => {
+    expect(executeCommands("5,5/0,0N/DDD")).toEqual("0,0O");
   });
 });

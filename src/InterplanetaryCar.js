@@ -182,9 +182,31 @@ function getMovementCommandsList(movementCommands)
   return movementCommandsList;
 }
 
+function rotateCar(pos,rotateCommand)
+{
+  let orientations = ['N','E','S','O'];
+  let orientation = getOrientation(pos);
+  let orientationIndex = orientations.indexOf(orientation);
+  if (rotateCommand == 'D')
+  {
+    orientationIndex = orientationIndex + 1
+  }
+  else if (rotateCommand == 'I')
+  {
+    orientationIndex = orientationIndex - 1
+  }
+  let newOrientation = orientations[orientationIndex];
+  let newPos = pos.substring(0,pos.length-1)+newOrientation;
+  return newPos;
+}
+
 function executeCommands(command)
 {
-  let movementFunctions = {'S':jump,'A':goAhead}
+  let movementFunctions = {'S':jump,
+    'A':goAhead,
+    'D':(pos)=>{return rotateCar(pos,'D')},
+    'I':(pos)=>{return rotateCar(pos,'I')}
+  }
   let commandParts = splitCommandParts(command);
   let gridShape = validateGridShape(commandParts[0]);
   let initPos = validateInitPos(commandParts[1]);
