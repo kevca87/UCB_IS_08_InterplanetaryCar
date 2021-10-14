@@ -17,12 +17,10 @@ se tomara un valor por defecto -> ["5,5","","IAIAIAIAA"]
 - Posición inicial: 
 - Comandos: IAIAIAIAA
 
-Si el usuario ingresa una cadena con alguna parte del comando incorrecta "5,5/fasdfsadf/IAIAIAIAA" 
 "5,5/1,2N/" -> ["5,5","1,2N",""]
 - Tamaño de la grilla: 5,5
 - Posición inicial: fasdfsadf
 - Comandos: IAIAIAIAA
-
 
 
 ===================================================================================================================

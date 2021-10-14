@@ -22,6 +22,45 @@ function validateGridShape(gridShape)
   return gridDimensions.join(',');
 }
 
+
+function getPositionsInt(pos)
+{
+  let defaultInitPos = 0;
+  let initPos = parseInt(pos);
+  if(isNaN(initPos))
+    initPos = defaultInitPos;
+  return initPos;
+}
+
+function getInitOrientation(orientation)
+{
+  let validOrientations = ["N","E","S","O"];
+  let defuaultOrientation = "N";
+  if (!(orientation in validOrientations))
+  {
+    orientation = defuaultOrientation;
+  }
+  return orientation;
+}
+
+function getInitialPosition(initPos)
+{
+  let position = initPos.split(',');
+  let posHasTwoDimensions = position.length == 2;
+  if (!posHasTwoDimensions)
+    position.push("0N");
+  let initOrientation = position[1][position[1].length-1];
+  position[1] = position[1].substring(0,position[1].length-1);
+  initOrientation = getInitOrientation(initOrientation);
+  return position.map((pos)=>getPositionsInt(pos)).join(',') + initOrientation;
+}
+
+function validateInitPos(initPos)
+{
+  let initialPosition = getInitialPosition(initPos);
+  return initialPosition;
+}
+
 function splitCommandParts(command)
 {
   let commandParts = command.split('/');
@@ -31,4 +70,4 @@ function splitCommandParts(command)
   return commandParts;
 }
 
-export {splitCommandParts,validateGridShape};
+export {splitCommandParts,validateGridShape,validateInitPos};

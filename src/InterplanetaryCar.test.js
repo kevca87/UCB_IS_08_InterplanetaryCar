@@ -1,4 +1,4 @@
-import {splitCommandParts,validateGridShape} from "./InterplanetaryCar.js"
+import {splitCommandParts,validateGridShape,validateInitPos} from "./InterplanetaryCar.js"
 
 describe("Split de la cadena de comandos", () => {
   it("TEST1: Debe retornar una lista las tres partes de los comandos de entrada", () => {
@@ -36,5 +36,26 @@ describe("Validar la entrada del tamaño de la grilla", () => {
   });
   it("TEST6: Retornar dimensiones de la grilla por defecto", () => {
     expect(validateGridShape("anything")).toEqual("5,5");
+  });
+});
+
+describe("Validar la entrada de la posicion inicial del auto", () => {
+  it("TEST1: Retornar la posicion inicial del auto", () => {
+    expect(validateInitPos("1,2N")).toEqual("1,2N");
+  });
+  it("TEST2: Retornar la posicion inicial del auto por defecto", () => {
+    expect(validateInitPos("")).toEqual("0,0N");
+  });
+  it("TEST3: Retornar la posicion inicial del auto por defecto", () => {
+    expect(validateInitPos("escribe-n,escribe-mDir")).toEqual("0,0N");
+  });
+  it("TEST4: Retornar la posicion inicial del auto por defecto", () => {
+    expect(validateInitPos("6,escribe-mDir")).toEqual("6,0N");
+  });
+  it("TEST5: Retornar la posicion inicial del auto por defecto", () => {
+    expect(validateInitPos("0,7E")).toEqual("0,7E");
+  });
+  it("TEST6: Retornar la posicion inicial del auto por defecto", () => {
+    expect(validateInitPos("0,7F")).toEqual("0,7N");
   });
 });
